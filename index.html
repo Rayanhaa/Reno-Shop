@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reno Shop - رينو شوب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* الهيدر العريض */
+        .main-header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo .arabic {
+            color: #fff;
+        }
+        
+        .logo .english {
+            color: #ff6b6b;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .top-nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .top-nav a:hover {
+            color: #ff6b6b;
+        }
+        
+        /* قسم الترحيب */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-section p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #f0f0f0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 0;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px 20px;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* المنتجات على اليسار */
+        .products-section {
+            flex: 3;
+            min-width: 300px;
+        }
+        
+        .section-title {
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b6b;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #ff6b6b;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-img {
+            height: 220px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 60px;
+            position: relative;
+        }
+        
+        .product-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .product-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+        }
+        
+        /* الجانب الأيمن */
+        .right-sidebar {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .register-section {
+            background: #fff5f5;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+        
+        /* قسم التواصل */
+        .contact-section {
+            background: white;
+            padding: 40px 20px;
+            margin: 40px 0;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-item i {
+            font-size: 40px;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item h3 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 50px 20px 25px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #ff6b6b;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #333;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .top-nav {
+                justify-content: center;
+            }
+            
+            .hero-section h1 {
+                font-size: 32px;
+            }
+            
+            .hero-section p {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الهيدر العلوي -->
+        <header class="main-header">
+            <div class="logo">
+                <span class="english">Reno Shop</span>
+                <span class="arabic">- رينو شوب</span>
+            </div>
+            <nav class="top-nav">
+                <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="#"><i class="fas fa-store"></i> المتجر</a>
+                <a href="#"><i class="fas fa-user"></i> الحساب</a>
+                <a href="#"><i class="fas fa-phone-alt"></i> تواصل</a>
+            </nav>
+        </header>
+        
+        <!-- قسم الهيرو -->
+        <section class="hero-section">
+            <h1>أفضل الإكسسوارات والعطور والموضة في مكان واحد</h1>
+            <p>اكتشف أحدث صيحات الموضة، العطور المميزة، إكسسوارات أنيقة، ومنتجات العناية الشخصية بأفضل الأسعار</p>
+            <a href="#" class="cta-button">تسوق الآن</a>
+        </section>
+        
+        <hr>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <!-- المنتجات على اليسار -->
+            <section class="products-section">
+                <h2 class="section-title"><i class="fas fa-shopping-bag"></i> منتجاتنا المميزة</h2>
+                
+                <div class="products-grid">
+                    <!-- المنتج 1 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <div class="product-category">عطور</div>
+                            <i class="fas fa-wine-bottle"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">عطر رينو الفاخر</h3>
+                            <p class="product-desc">عطر مميز برائحة تدوم طويلاً، مناسب للرجال والنساء</p>
+                            <div class="product-price">199 ر.س</div>
+                            <a href="#" class="btn">إضافة إلى السلة</a>
+                        </div>
+                    </div>
+                    
+                    <!-- المنتج 2 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <div class="product-category">إكسسوارات</div>
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">سوار فاخر من الفضة</h3>
+                            <p class="product-desc">سوار أنيق من الفضة عيار 925 مع تصميم عصري</p>
+                            <div class="product-price">349 ر.س</div>
+                            <a href="#" class="btn">إضافة إلى السلة</a>
+                        </div>
+                    </div>
+                    
+                    <!-- المنتج 3 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <div class="product-category">ملابس</div>
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">تيشيرت رينو الأساسي</h3>
+                            <p class="product-desc">تيشيرت قطني عالي الجودة بتصميم بسيط وأنيق</p>
+                            <div class="product-price">89 ر.س</div>
+                            <a href="#" class="btn">إضافة إلى السلة</a>
+                        </div>
+                    </div>
+                    
+                    <!-- المنتج 4 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <div class="product-category">كوزمتكس</div>
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">مجموعة أدوات تجميل</h3>
+                            <p class="product-desc">مجموعة متكاملة من فرش وأدوات التجميل عالية الجودة</p>
+                            <div class="product-price">249 ر.س</div>
+                            <a href="#" class="btn">إضافة إلى السلة</a>
+                        </div>
+                    </div>
+                    
+                    <!-- المنتج 5 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <div class="product-category">عطور</div>
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">عطر فلورال نسائي</h3>
+                            <p class="product-desc">عطر برائحة الزهور الطبيعية، مثالي للنساء</p>
+                            <div class="product-price">179 ر.س</div>
+                            <a href="#" class="btn">إضافة إلى السلة</a>
+                        </div>
+                    </div>
+                    
+                    <!-- المنتج 6 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <div class="product-category">إكسسوارات</div>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">ساعة يد أنيقة</h3>
+                            <p class="product-desc">ساعة يد بتصميم عصري مع حزام جلد طبيعي</p>
+                            <div class="product-price">499 ر.س</div>
+                            <a href="#" class="btn">إضافة إلى السلة</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- الجانب الأيمن -->
+            <div class="right-sidebar">
+                <!-- من نحن -->
+                <section class="about-section">
+                    <h2 class="section-title"><i class="fas fa-info-circle"></i> من نحن</h2>
+                    <p>رينو شوب هو وجهتك الأولى للإكسسوارات والعطور والملابس ومنتجات العناية الشخصية. نقدم منتجات عالية الجودة بأسعار منافسة مع ضمان رضا العملاء.</p>
+                    <br>
+                    <p><i class="fas fa-check" style="color: #ff6b6b;"></i> شحن سريع</p>
+                    <p><i class="fas fa-check" style="color: #ff6b6b;"></i> ضمان الجودة</p>
+                    <p><i class="fas fa-check" style="color: #ff6b6b;"></i> دعم فني 24/7</p>
+                </section>
+                
+                <!-- إنشاء حساب -->
+                <section class="register-section">
+                    <h2 class="section-title"><i class="fas fa-user-plus"></i> إنشاء حساب</h2>
+                    
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" placeholder="أدخل اسمك الكامل">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>كلمة المرور</label>
+                        <input type="password" placeholder="أنشئ كلمة مرور قوية">
+                    </div>
+                    
+                    <button class="btn">تسجيل حساب جديد</button>
+                </section>
+            </div>
+        </div>
+        
+        <!-- قسم التواصل -->
+        <section class="contact-section">
+            <h2 class="section-title" style="text-align: center; justify-content: center;"><i class="fas fa-headset"></i> تواصل معنا</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>البريد الإلكتروني</h3>
+                    <p>info@renoshop.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>الهاتف</h3>
+                    <p>+249 900 123 456</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>العنوان</h3>
+                    <p>الخرطوم، السودان</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>ساعات العمل</h3>
+                    <p>24/7</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- الفوتر -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> المنتجات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> العطور</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الإكسسوارات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الملابس</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>خدماتنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الشحن السريع</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الإرجاع والاستبدال</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الدعم الفني</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الضمان</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-phone"></i> +249 900 123 456</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> support@renoshop.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> الخرطوم، السودان</a></li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>Reno Shop - رينو شوب © 2024</p>
+                <p style="margin-top: 10px;">جميع الحقوق محفوظة</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // تفاعل مع نموذج التسجيل
+        document.querySelector('.register-section .btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const name = document.querySelector('.register-section input[type="text"]').value;
+            const email = document.querySelector('.register-section input[type="email"]').value;
+            
+            if (name && email) {
+                alert(`شكراً ${name}! تم إنشاء حسابك بنجاح في رينو شوب.`);
+                document.querySelector('.register-section input[type="text"]').value = '';
+                document.querySelector('.register-section input[type="email"]').value = '';
+                document.querySelector('.register-section input[type="password"]').value = '';
+            } else {
+                alert('الرجاء ملء جميع الحقول المطلوبة');
+            }
+        });
+        
+        // تفاعل مع أزرار إضافة إلى السلة
+        const addToCartButtons = document.querySelectorAll('.product-card .btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productTitle = this.closest('.product-card').querySelector('.product-title').textContent;
+                alert(`تم إضافة "${productTitle}" إلى سلة التسوق الخاصة بك!`);
+            });
+        });
+    </script>
+</body>
+</html>
